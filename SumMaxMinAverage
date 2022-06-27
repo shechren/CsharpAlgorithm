@@ -1,0 +1,78 @@
+namespace Algorithm
+{
+    class Program
+    {
+        static int[] scores = {77, 89, 95, 60, 91, 100, 96, 88, 75, 82 };
+        
+        class Sum
+        {
+            // 85점 이상인 학생들의 총점을 계산
+            int sum = 0;
+            public void SumResult()
+            {
+            for (int i = 0; i < scores.Length; i++)
+                if (scores[i] > 85)
+                    sum += scores[i];
+
+            Console.WriteLine($"for문 합계: {sum}");
+            Console.WriteLine($"LINQ 합계: {scores.Where(s => s >= 85).Sum()}");
+            Console.WriteLine("---------------------------------");
+            }
+        }
+        class MaxMin
+        {
+            public void MaxMinResult()
+            {
+                int max = 0; int min = 100;
+
+                for (int i = 0; i < scores.Length; i++)
+                    if (max <= scores[i])
+                        max = scores[i];
+                    else
+                        continue;
+
+                for (int i = 0; i < scores.Length; i++)
+                    if (min > scores[i])
+                        min = scores[i];
+                    else
+                        continue;
+
+                Console.WriteLine($"for문 최고 점수 : {max}");
+                Console.WriteLine($"LINQ 최고 점수 : {scores.Max()}");
+                Console.WriteLine($"for문 최소 점수 : {min}");
+                Console.WriteLine($"LINQ 최소 점수 : {scores.Min()}");
+                Console.WriteLine("---------------------------------");
+            }
+        }
+        class Average
+        {
+            public void AverageResult()
+            {
+                int avg0 = 0;
+                int avg1 = 0;
+
+                for (int i = 0; i < scores.Length; i++)
+                {
+                    avg0 += scores[i];
+                    if (i == scores.Length - 1)
+                        avg0 /= scores.Length;
+                }
+                avg1 = scores.Sum() / scores.Length;
+                    
+                Console.WriteLine($"for문 평균 점수 : {avg0}");
+                Console.WriteLine($"Sum / Length 평균 점수 : {avg1}");
+                Console.WriteLine($"LINQ 평균 점수 : {scores.Average()}");
+            }
+        }
+        static void Main(string[] args)
+        {
+            Sum sum = new Sum();
+            sum.SumResult();
+            MaxMin maxmin = new MaxMin();
+            maxmin.MaxMinResult();
+            Average average = new Average();
+            average.AverageResult();
+
+        }
+    }
+}
